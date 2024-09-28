@@ -1,0 +1,46 @@
+</html>
+    <head>
+    <meta charset="utf-8">
+    <title>Zmina hasła</title>
+    <link rel="stylesheet" href="przypominanie.css">
+    </head>
+    <body>
+        <div class="okienko">
+            <div class="baner">
+            </div>
+            <h3>ZMIANA HASŁA</h3>
+<form action="zmiana.php" method="post">
+    <label> login</label><br>
+<input type="text" placeholder="podaj login" name="login"><br>
+    <label> Wybierz pytanie które wybrałeś podczas rejstracji</label>
+    <select name="przypomnienie">
+        <option >Twój pierwszy koncert?</option>
+        <option >Imie pierwszej miłości?</option>
+        <option >Imie pani której nienawidziłeś w podstawówce?</option>
+        <option >Twoja pierwsza praca?</option>
+      </select><br>
+      <label>Odpowiedź na pytanie któe podałeś przy rejstracji</label>
+      <input type="text" placeholder="podaj odpowiedz" name="pytanie"><br>
+
+<label> Nowe hasło</label><br>
+<input type="password" placeholder="podaj haslo" name="nhaslo" id="nhaslo">  <img src="oko.png" id="oczko">
+<br>
+<input type="submit" name="przypomnienie" value="zmień hasło">
+</form>
+
+        </div>
+        
+    </body>
+    <script>
+        
+        document.getElementById('oczko').addEventListener('click', function() {
+                        var input = document.getElementById('nhaslo');
+                        if (input.type === 'password') {
+                            input.type = 'text';
+                        } else {
+                            input.type = 'password';
+                        }
+                    });
+        </script>
+        
+</html>

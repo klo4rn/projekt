@@ -1,0 +1,50 @@
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>rejstracja</title>
+    <link rel="stylesheet" href="rejestracja.css">
+    </head>
+    <body>
+        <div class="okienko">
+            <div class="baner">
+            </div>
+            <h3>ZAREJESTRUJ SIĘ</h3>
+<form action="rejstracja.php" method="post">
+<label> login</label><br>
+<input type="text" placeholder="podaj login" name="login"><br>
+<label> haslo</label><br>
+<input type="password" placeholder="podaj haslo" name="haslo" id="haslo">  <img src="oko.png" id="oczko"><br>
+<label> adres</label><br>
+<input type="text" placeholder="podaj email" name="email"><br>
+<label> adres</label><br>
+<input type="text" placeholder="podaj adres" name="adres"><br>
+<label> data urodzenia</label><br>
+<input type="date" placeholder="podaj date urodzenia" name="data_uro" id="data_uro"><br>
+<label> Pytanie do przypomnienia hasła</label>
+<select name="przypomnienie">
+    <option >Twój pierwszy koncert?</option>
+    <option >Imie pierwszej miłości?</option>
+    <option >Imie pani której nienawidziłeś w podstawówce?</option>
+    <option >Twoja pierwsza praca?</option>
+  </select><br>
+  <label>Podaj odpowiedz na pytanie które wybrałeś</label>
+  <input type="text" placeholder="podaj odpowiedz" name="pytanie"><br>
+
+
+
+<input type="submit" name="zarejestruj" value="zarejestruj" id="zarejestruj">
+</form>
+
+        </div>
+        <script>
+            document.getElementById('oczko').addEventListener('click', function() {
+                var input = document.getElementById('haslo');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                } else {
+                    input.type = 'password';
+                }
+            });
+        </script>
+    </body>
+</html>

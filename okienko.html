@@ -1,0 +1,41 @@
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>logowanie</title>
+    <link rel="stylesheet" href="logowanie.css">
+    </head>
+    <body>
+        <div class="okienko">
+            <div class="baner">
+            </div>
+            <h3>LOGOWANIE</h3>
+<form action="logowanie.php" method="post">
+<label> login</label><br>
+<input type="text" placeholder="podaj login" name="login"><br>
+<label> haslo</label><br>
+<input type="password" placeholder="podaj haslo" name="haslo" id="haslo">  <img src="oko.png" id="oczko">
+<br>
+<input type="submit" name="loguj" value="loguj" id="loguj">
+</form>
+<a href="przypominanie.html">Nie pamietasz hasła?</a>
+<h3>jesli nie masz konta zarejestruj sie</h3>
+<button id="rejestracja" onclick="przenies()">zarejestruj sie</button>
+
+        </div>
+        
+    </body>
+    <script>
+        function przenies(){
+            window.location.href= "rejestracja.html";
+        }
+        document.getElementById('oczko').addEventListener('click', function() {
+                        var input = document.getElementById('haslo');
+                        if (input.type === 'password') {
+                            input.type = 'text';
+                        } else {
+                            input.type = 'password';
+                        }
+                    });
+        </script>
+        
+</html>
