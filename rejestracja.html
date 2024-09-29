@@ -1,7 +1,7 @@
-<html>
+
     <head>
     <meta charset="utf-8">
-    <title>rejstracja</title>
+    <title>rejestracja</title>
     <link rel="stylesheet" href="rejestracja.css">
     </head>
     <body>
@@ -9,28 +9,30 @@
             <div class="baner">
             </div>
             <h3>ZAREJESTRUJ SIĘ</h3>
-<form action="rejstracja.php" method="post">
+<form action="rejestracja.php" method="post">
 <label> login</label><br>
 <input type="text" placeholder="podaj login" name="login"><br>
 <label> haslo</label><br>
 <input type="password" placeholder="podaj haslo" name="haslo" id="haslo">  <img src="oko.png" id="oczko"><br>
-<label> adres</label><br>
+<label> email</label><br>
 <input type="text" placeholder="podaj email" name="email"><br>
 <label> adres</label><br>
 <input type="text" placeholder="podaj adres" name="adres"><br>
 <label> data urodzenia</label><br>
-<input type="date" placeholder="podaj date urodzenia" name="data_uro" id="data_uro"><br>
+<input type="date" placeholder="podaj date urodzenia" name="data_uro" id="data_uro" ><br>
 <label> Pytanie do przypomnienia hasła</label>
 <select name="przypomnienie">
-    <option >Twój pierwszy koncert?</option>
-    <option >Imie pierwszej miłości?</option>
-    <option >Imie pani której nienawidziłeś w podstawówce?</option>
-    <option >Twoja pierwsza praca?</option>
+    <option value="1" >Twój pierwszy koncert?</option>
+    <option value="2">Imie pierwszej miłości?</option>
+    <option value="3">Imie pani której nienawidziłeś w podstawówce?</option>
+    <option value="4">Twoja pierwsza praca?</option>
   </select><br>
   <label>Podaj odpowiedz na pytanie które wybrałeś</label>
   <input type="text" placeholder="podaj odpowiedz" name="pytanie"><br>
 
-
+  <?php if ($komunikat): ?>
+<p style="color:red;"><?php echo $komunikat; ?></p>
+<?php endif; ?>
 
 <input type="submit" name="zarejestruj" value="zarejestruj" id="zarejestruj">
 </form>

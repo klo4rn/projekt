@@ -12,8 +12,8 @@
 <form action="logowanie.php" method="post">
 <label> login</label><br>
 <input type="text" placeholder="podaj login" name="login"><br>
-<label> haslo</label><br>
-<input type="password" placeholder="podaj haslo" name="haslo" id="haslo">  <img src="oko.png" id="oczko">
+<label> hasło</label><br>
+<input type="password" placeholder="podaj hasło" name="hasło" id="hasło">  <img src="oko.png" id="oczko">
 <br>
 <input type="submit" name="loguj" value="loguj" id="loguj">
 </form>
@@ -29,7 +29,7 @@
             window.location.href= "rejestracja.html";
         }
         document.getElementById('oczko').addEventListener('click', function() {
-                        var input = document.getElementById('haslo');
+                        var input = document.getElementById('hasło');
                         if (input.type === 'password') {
                             input.type = 'text';
                         } else {
