@@ -22,7 +22,7 @@
             require_once 'database.php'; 
 
             $login = $_POST['login'];
-            $haslo = $_POST['haslo'];
+            $haslo = $_POST['haslo']; 
             $email = $_POST['email'];
             $adres = $_POST['adres'];
             $data = $_POST['data_uro'];
@@ -30,7 +30,7 @@
             $odpowiedz = $_POST['pytanie'];
             $komunikat = '';
 
-           
+            
             $loginzbazy = $pdo->prepare("SELECT login FROM konto_uzytkownika WHERE login = :login");
             $loginzbazy->execute(['login' => $login]);
 
@@ -46,7 +46,7 @@
                 
                 $haslo_hash = password_hash($haslo, PASSWORD_DEFAULT);
 
-               
+                
                 $dodawanie = $pdo->prepare("INSERT INTO konto_uzytkownika (login, haslo, email, adres, data_urodzenia, id_pytania_pomocniczego, odpowiedz) 
                     VALUES (:login, :haslo, :email, :adres, :data, :pytanie, :odpowiedz)");
                 $dodawanie->execute([
@@ -69,7 +69,7 @@
             <label>Login</label><br>
             <input type="text" placeholder="Podaj login" name="login" required><br>
             <label>Haslo</label><br>
-            <input type="password" placeholder="Podaj haslo" name="haslo" id="haslo" required> 
+            <input type="password" placeholder="Podaj haslo" name="haslo" id="haslo" required><br> 
             <img src="oko.png" id="oczko" alt="Pokaż hasło"><br>
             <label>Email</label><br>
             <input type="text" placeholder="Podaj email" name="email" required><br>

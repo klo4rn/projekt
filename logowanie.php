@@ -24,7 +24,7 @@
             $login = $_POST['login'];
             $haslo = $_POST['haslo']; 
 
-      
+            
             $stmt = $pdo->prepare("SELECT haslo FROM konto_uzytkownika WHERE login = :login"); 
             $stmt->execute(['login' => $login]);
 
@@ -33,7 +33,7 @@
                 $haslo_z_bazy = $row['haslo']; 
 
                 if (password_verify($haslo, $haslo_z_bazy)) {
-                    header("Location: głowna.html");
+                    header("Location: glowna.html");
                     exit;
                 } else {
                     echo '<p style="color:red;">Podane hasło jest błędne.</p>'; 

@@ -11,53 +11,56 @@
         <h3>ZMIANA HASŁA</h3>
 
         <?php
-        
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
 
-        
+        $komunikat = '';
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            require_once 'database.php'; 
+            require_once 'database.php';
 
             $login = $_POST['login'];
             $pytanie = $_POST['przypomnienie'];
             $odpowiedz = $_POST['pytanie'];
-            $nhaslo = $_POST['nhaslo']; 
+            $nhaslo = $_POST['nhaslo'];
+            $starylogin = $pdo->query("SELECT login from konto_uzytkownika where login ='$login'");
+            $starepytanie = $pdo->query("SELECT id_pytania_pomocniczego from konto_uzytkownika where login ='$login'");
+$staraodpowiedz = $pdo->query("SELECT odpowiedz from konto_uzytkownika where login = '$login'");
+ foreach($starylogin as $staryloginrow)
+ {
+    $sl = $staryloginrow["login"];
+ };
+ foreach($starepytanie as $starepytanierow)
+ {
+    $sp = $starepytanierow["id_pytania_pomocniczego"];
+ }
+ foreach($staraodpowiedz as $staraodpowiedzrow){
+    $so = $staraodpowiedzrow["odpowiedz"];
 
-            
-            $starylogin = $pdo->prepare("SELECT login FROM konto_uzytkownika WHERE login = :login");
-            $starylogin->execute(['login' => $login]);
-            $sl = $starylogin->fetchColumn();
-
-            $starepytanie = $pdo->prepare("SELECT id_pytania_pomocniczego FROM konto_uzytkownika WHERE login = :login");
-            $starepytanie->execute(['login' => $login]);
-            $sp = $starepytanie->fetchColumn();
-
-            $staraodpowiedz = $pdo->prepare("SELECT odpowiedz FROM konto_uzytkownika WHERE login = :login");
-            $staraodpowiedz->execute(['login' => $login]);
-            $so = $staraodpowiedz->fetchColumn();
-
-           
-            if (empty($login) || empty($nhaslo) || empty($odpowiedz)) {
-                echo "Nie wypełniłeś wszystkiego.";
-            } elseif ($login != $sl || $pytanie != $sp || $odpowiedz != $so) {
-                echo "Dane są złe.";
+ }
+ echo $so;
+ echo $sl;
+ echo $sp;
+ echo $odpowiedz;
+ echo $login;
+ echo $pytanie;
+            if ($login !== $sl || $pytanie != $sp || $odpowiedz != $so) {
+                $komunikat = "Dane są złe.";
             } else {
-                
                 $haslo_hash = password_hash($nhaslo, PASSWORD_DEFAULT);
-
-                
-                $zmiana = $pdo->prepare("UPDATE konto_uzytkownika SET haslo = :haslo WHERE login = :login");
-                $zmiana->execute(['haslo' => $haslo_hash, 'login' => $login]);
-
+                $zmiana = $pdo->query("UPDATE konto_uzytkownika SET haslo = '$haslo_hash' WHERE login = '$login'");
                 header("Location: logowanie.php");
                 exit;
             }
         }
         ?>
 
-        <form action="" method="post"> 
+        <?php if ($komunikat): ?>
+            <p style="color:red;"><?php echo $komunikat; ?></p>
+        <?php endif; ?>
+
+        <form action="" method="post">
             <label>Login</label><br>
             <input type="text" placeholder="Podaj login" name="login" required><br>
             <label>Wybierz pytanie, które wybrałeś podczas rejestracji</label>
@@ -69,17 +72,16 @@
             </select><br>
             <label>Odpowiedź na pytanie, które podałeś przy rejestracji</label><br>
             <input type="text" placeholder="Podaj odpowiedź" name="pytanie" required><br>
-
-            <label>Nowe haslo</label><br>
-            <input type="password" placeholder="Podaj haslo" name="nhaslo" id="nhaslo" required>
+            <label>Nowe hasło</label><br>
+            <input type="password" placeholder="Podaj hasło" name="nhaslo" id="nhaslo" required><br>
             <img src="oko.png" id="oczko" alt="Pokaż hasło"><br>
-            <input type="submit" name="przypomnienie" value="Zmień hasło">
+            <input type="submit" name="zmiana" value="Zmień hasło">
         </form>
     </div>
 
     <script>
         document.getElementById('oczko').addEventListener('click', function() {
-            var input = document.getElementById('nhaslo'); 
+            var input = document.getElementById('nhaslo');
             if (input.type === 'password') {
                 input.type = 'text';
             } else {
