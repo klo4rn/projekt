@@ -4,12 +4,12 @@ include('database.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_status'])) {
     $order_id = $_POST['order_id'];
     $status = $_POST['status'];
-    $stmt = $db->prepare("UPDATE orders SET status = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE orders SET status = ? WHERE id = ?");
     $stmt->execute([$status, $order_id]);
     echo "Status zamówienia został zaktualizowany!";
 }
 
-$orders = $db->query("SELECT * FROM orders")->fetchAll();
+$orders = $pdo->query("SELECT * FROM orders")->fetchAll();
 ?>
 
 <!DOCTYPE html>

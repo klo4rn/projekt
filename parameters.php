@@ -3,14 +3,14 @@ include('database.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_parameter'])) {
     $parameter_name = $_POST['parameter_name'];
-    $stmt = $db->prepare("INSERT INTO parameters (name) VALUES (?)");
+    $stmt = $pdo->prepare("INSERT INTO parameters (name) VALUES (?)");
     $stmt->execute([$parameter_name]);
     echo "Dodano nowy parametr!";
 }
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $stmt = $db->prepare("DELETE FROM parameters WHERE id = ?");
+    $stmt = $pdo->prepare("DELETE FROM parameters WHERE id = ?");
     $stmt->execute([$id]);
     echo "Parametr został usunięty!";
 }
@@ -39,7 +39,7 @@ if (isset($_GET['delete'])) {
             <th>Nazwa</th>
         </tr>
         <?php
-        $parameters = $db->query("SELECT * FROM parameters")->fetchAll();
+        $parameters = $pdo->query("SELECT * FROM parameters")->fetchAll();
         foreach ($parameters as $param) {
             echo "<tr><td>{$param['id']}</td><td>{$param['name']}</td>";
             echo "<td><a href='parameters.php?delete={$param['id']}'>Usuń</a></td></tr>";

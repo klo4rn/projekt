@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
 
         <label>Kategorie:</label>
         <?php
-        $categories = $db->query("SELECT * FROM categories")->fetchAll();
+        $categories = $pdo->query("SELECT * FROM categories")->fetchAll();
         foreach ($categories as $category) {
             echo "<input type='checkbox' name='category_ids[]' value='{$category['id']}'> {$category['name']}<br>";
         }
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
 
         <label>Parametry:</label>
         <?php
-        $parameters = $db->query("SELECT * FROM parameters")->fetchAll();
+        $parameters = $pdo->query("SELECT * FROM parameters")->fetchAll();
         foreach ($parameters as $parameter) {
             echo "<label for='param_{$parameter['id']}'>{$parameter['name']}:</label>";
             echo "<input type='text' name='parameters[{$parameter['id']}]' id='param_{$parameter['id']}'><br>";

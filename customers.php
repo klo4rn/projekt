@@ -4,12 +4,12 @@ include('database.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_note'])) {
     $user_id = $_POST['user_id'];
     $note = $_POST['note'];
-    $stmt = $db->prepare("UPDATE konto_uzytkownika SET note = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE konto_uzytkownika SET note = ? WHERE id = ?");
     $stmt->execute([$note, $user_id]);
     echo "Notatka została dodana!";
 }
 
-$customers = $db->query("SELECT * FROM konto_uzytkownika")->fetchAll();
+$customers = $pdo->query("SELECT * FROM konto_uzytkownika")->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +33,8 @@ $customers = $db->query("SELECT * FROM konto_uzytkownika")->fetchAll();
         <?php foreach ($customers as $customer): ?>
         <tr>
             <td><?= $customer['id'] ?></td>
-            <td><?= $customer['imie'] ?></td>
-            <td><?= $customer['nazwisko'] ?></td>
+            <td><?= $customer['login'] ?></td>
+            <td><?= $customer['haslo'] ?></td>
             <td><?= $customer['email'] ?></td>
             <td><?= $customer['note'] ?? 'Brak' ?></td>
             <td>

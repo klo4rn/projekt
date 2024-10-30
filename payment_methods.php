@@ -4,8 +4,8 @@ require_once 'database.php';
 if (isset($_POST['add_payment_method'])) {
     $name = $_POST['name'];
 
-    $query = $db->prepare("INSERT INTO payment_methods (name) VALUES (?)");
-    $query->bind_param('s', $name);
+    $query = $pdo->prepare("INSERT INTO payment_methods (name) VALUES (:name)");
+    $query->bindValue(':name', $name);
     $query->execute();
 
     header("Location: payment_methods.php");
@@ -16,8 +16,9 @@ if (isset($_POST['edit_payment_method'])) {
     $id = $_POST['id'];
     $name = $_POST['name'];
 
-    $query = $db->prepare("UPDATE payment_methods SET name = ? WHERE id = ?");
-    $query->bind_param('si', $name, $id);
+    $query = $pdo->prepare("UPDATE payment_methods SET name = :name WHERE id = :id");
+    $query->bindValue(':name', $name);
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();
 
     header("Location: payment_methods.php");
@@ -27,16 +28,15 @@ if (isset($_POST['edit_payment_method'])) {
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
 
-    $query = $db->prepare("DELETE FROM payment_methods WHERE id = ?");
-    $query->bind_param('i', $id);
+    $query = $pdo->prepare("DELETE FROM payment_methods WHERE id = :id");
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();
 
     header("Location: payment_methods.php");
     exit();
 }
 
-$payment_methods_result = $db->query("SELECT * FROM payment_methods");
-
+$payment_methods_result = $pdo->query("SELECT * FROM payment_methods");
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +70,7 @@ $payment_methods_result = $db->query("SELECT * FROM payment_methods");
         </tr>
     </thead>
     <tbody>
-        <?php while ($method = $payment_methods_result->fetch_assoc()): ?>
+        <?php while ($method = $payment_methods_result->fetch(PDO::FETCH_ASSOC)): ?>
             <tr>
                 <td><?php echo $method['id']; ?></td>
                 <td><?php echo htmlspecialchars($method['name']); ?></td>
@@ -82,14 +82,14 @@ $payment_methods_result = $db->query("SELECT * FROM payment_methods");
         <?php endwhile; ?>
     </tbody>
 </table>
+
 <?php if (isset($_GET['edit'])): ?>
     <?php
         $id = $_GET['edit'];
-        $query = $db->prepare("SELECT * FROM payment_methods WHERE id = ?");
-        $query->bind_param('i', $id);
+        $query = $pdo->prepare("SELECT * FROM payment_methods WHERE id = :id");
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
         $query->execute();
-        $result = $query->get_result();
-        $method = $result->fetch_assoc();
+        $method = $query->fetch(PDO::FETCH_ASSOC);
     ?>
     <div class="form-container">
         <h2>Edytuj Metodę Płatności</h2>

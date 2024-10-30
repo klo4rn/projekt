@@ -5,8 +5,9 @@ if (isset($_POST['add_page'])) {
     $title = $_POST['title'];
     $content = $_POST['content'];
 
-    $query = $db->prepare("INSERT INTO pages (title, content) VALUES (?, ?)");
-    $query->bind_param('ss', $title, $content);
+    $query = $pdo->prepare("INSERT INTO pages (title, content) VALUES (:title, :content)");
+    $query->bindValue(':title', $title);
+    $query->bindValue(':content', $content);
     $query->execute();
 
     header("Location: pages.php");
@@ -18,8 +19,10 @@ if (isset($_POST['edit_page'])) {
     $title = $_POST['title'];
     $content = $_POST['content'];
 
-    $query = $db->prepare("UPDATE pages SET title = ?, content = ? WHERE id = ?");
-    $query->bind_param('ssi', $title, $content, $id);
+    $query = $pdo->prepare("UPDATE pages SET title = :title, content = :content WHERE id = :id");
+    $query->bindValue(':title', $title);
+    $query->bindValue(':content', $content);
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();
 
     header("Location: pages.php");
@@ -29,16 +32,15 @@ if (isset($_POST['edit_page'])) {
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
 
-    $query = $db->prepare("DELETE FROM pages WHERE id = ?");
-    $query->bind_param('i', $id);
+    $query = $pdo->prepare("DELETE FROM pages WHERE id = :id");
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();
 
     header("Location: pages.php");
     exit();
 }
 
-$pages_result = $db->query("SELECT * FROM pages");
-
+$pages_result = $pdo->query("SELECT * FROM pages");
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +77,7 @@ $pages_result = $db->query("SELECT * FROM pages");
         </tr>
     </thead>
     <tbody>
-        <?php while ($page = $pages_result->fetch_assoc()): ?>
+        <?php while ($page = $pages_result->fetch(PDO::FETCH_ASSOC)): ?>
             <tr>
                 <td><?php echo $page['id']; ?></td>
                 <td><?php echo htmlspecialchars($page['title']); ?></td>
@@ -92,11 +94,10 @@ $pages_result = $db->query("SELECT * FROM pages");
 <?php if (isset($_GET['edit'])): ?>
     <?php
         $id = $_GET['edit'];
-        $query = $db->prepare("SELECT * FROM pages WHERE id = ?");
-        $query->bind_param('i', $id);
+        $query = $pdo->prepare("SELECT * FROM pages WHERE id = :id");
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
         $query->execute();
-        $result = $query->get_result();
-        $page = $result->fetch_assoc();
+        $page = $query->fetch(PDO::FETCH_ASSOC);
     ?>
     <div class="form-container">
         <h2>Edytuj Stronę</h2>

@@ -5,8 +5,9 @@ if (isset($_POST['add_shipping_method'])) {
     $name = $_POST['name'];
     $cost = $_POST['cost'];
 
-    $query = $db->prepare("INSERT INTO shipping_methods (name, cost) VALUES (?, ?)");
-    $query->bind_param('sd', $name, $cost);
+    $query = $pdo->prepare("INSERT INTO shipping_methods (name, cost) VALUES (:name, :cost)");
+    $query->bindValue(':name', $name);
+    $query->bindValue(':cost', $cost);
     $query->execute();
 
     header("Location: shipping_methods.php");
@@ -18,8 +19,10 @@ if (isset($_POST['edit_shipping_method'])) {
     $name = $_POST['name'];
     $cost = $_POST['cost'];
 
-    $query = $db->prepare("UPDATE shipping_methods SET name = ?, cost = ? WHERE id = ?");
-    $query->bind_param('sdi', $name, $cost, $id);
+    $query = $pdo->prepare("UPDATE shipping_methods SET name = :name, cost = :cost WHERE id = :id");
+    $query->bindValue(':name', $name);
+    $query->bindValue(':cost', $cost);
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();
 
     header("Location: shipping_methods.php");
@@ -29,15 +32,15 @@ if (isset($_POST['edit_shipping_method'])) {
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
 
-    $query = $db->prepare("DELETE FROM shipping_methods WHERE id = ?");
-    $query->bind_param('i', $id);
+    $query = $pdo->prepare("DELETE FROM shipping_methods WHERE id = :id");
+    $query->bindValue(':id', $id, PDO::PARAM_INT);
     $query->execute();
 
     header("Location: shipping_methods.php");
     exit();
 }
 
-$shipping_methods_result = $db->query("SELECT * FROM shipping_methods");
+$shipping_methods_result = $pdo->query("SELECT * FROM shipping_methods");
 
 ?>
 
@@ -47,7 +50,6 @@ $shipping_methods_result = $db->query("SELECT * FROM shipping_methods");
     <meta charset="UTF-8">
     <title>Zarządzanie Metodami Dostawy</title>
     <link rel="stylesheet" href="styling.css">
-    
 </head>
 <body>
 
@@ -76,7 +78,7 @@ $shipping_methods_result = $db->query("SELECT * FROM shipping_methods");
         </tr>
     </thead>
     <tbody>
-        <?php while ($method = $shipping_methods_result->fetch_assoc()): ?>
+        <?php while ($method = $shipping_methods_result->fetch(PDO::FETCH_ASSOC)): ?>
             <tr>
                 <td><?php echo $method['id']; ?></td>
                 <td><?php echo htmlspecialchars($method['name']); ?></td>
@@ -93,11 +95,10 @@ $shipping_methods_result = $db->query("SELECT * FROM shipping_methods");
 <?php if (isset($_GET['edit'])): ?>
     <?php
         $id = $_GET['edit'];
-        $query = $db->prepare("SELECT * FROM shipping_methods WHERE id = ?");
-        $query->bind_param('i', $id);
+        $query = $pdo->prepare("SELECT * FROM shipping_methods WHERE id = :id");
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
         $query->execute();
-        $result = $query->get_result();
-        $method = $result->fetch_assoc();
+        $method = $query->fetch(PDO::FETCH_ASSOC);
     ?>
     <div class="form-container">
         <h2>Edytuj Metodę Dostawy</h2>
