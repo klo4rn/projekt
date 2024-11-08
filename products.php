@@ -14,18 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
         
         if (move_uploaded_file($product_image['tmp_name'], $target_file)) {
             
-            $stmt = $db->prepare("INSERT INTO products (name, image) VALUES (?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO products (name, image) VALUES (?, ?)");
             $stmt->execute([$product_name, $target_file]);
 
-            $product_id = $db->lastInsertId();
+            $product_id = $pdo->lastInsertId();
             
             foreach ($category_ids as $category_id) {
-                $db->prepare("INSERT INTO product_categories (product_id, category_id) VALUES (?, ?)")
+                $pdo->prepare("INSERT INTO product_categories (product_id, category_id) VALUES (?, ?)")
                    ->execute([$product_id, $category_id]);
             }
 
             foreach ($parameter_values as $parameter_id => $value) {
-                $db->prepare("INSERT INTO product_parameters (product_id, parameter_id, value) VALUES (?, ?, ?)")
+                $pdo->prepare("INSERT INTO product_parameters (product_id, parameter_id, value) VALUES (?, ?, ?)")
                    ->execute([$product_id, $parameter_id, $value]);
             }
             echo "Produkt dodany pomyślnie!";
