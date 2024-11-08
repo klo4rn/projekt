@@ -35,12 +35,15 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="styling.css">
 </head>
 <body>
+<button class="przenies" onclick="window.location.href='admin.php'">Powrót</button>
     <h1>Zarządzanie Kategoriami</h1>
-
+    <div class="form-container">
+    <h2>Dodaj Nową kategorie</h2>
     <form action="categories.php" method="POST">
         <input type="text" name="category_name" placeholder="Nazwa kategorii" required>
         <button type="submit" name="add_category">Dodaj kategorię</button>
     </form>
+</div>
 
     <h2>Lista Kategorii</h2>
     <table>
@@ -68,5 +71,7 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </tr>
         <?php endforeach; ?>
     </table>
+    
+
 </body>
 </html>

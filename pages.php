@@ -51,6 +51,7 @@ $pages_result = $pdo->query("SELECT * FROM pages");
     <link rel="stylesheet" href="styling.css">
 </head>
 <body>
+<button class="przenies" onclick="window.location.href='admin.php'">Powrót</button>
 
 <h1>Zarządzanie Stronami Informacyjnymi</h1>
 

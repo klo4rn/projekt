@@ -24,14 +24,19 @@ if (isset($_GET['delete'])) {
     <link rel="stylesheet" href="styling.css">
 </head>
 <body>
-    <h1>Zarządzanie Parametrami Produktów</h1>
+<button class="przenies" onclick="window.location.href='admin.php'">Powrót</button>
+<h1>Zarządzanie Parametrami Produktów</h1>
+<div class="form-container">
+    
+<h2>Dodawanie paramentrów produktów</h2>
+    
 
     <form action="parameters.php" method="POST">
         <label for="parameter_name">Nazwa parametru:</label>
         <input type="text" name="parameter_name" id="parameter_name" required>
         <button type="submit" name="add_parameter">Dodaj parametr</button>
     </form>
-
+</div>
     <h2>Istniejące Parametry</h2>
     <table>
         <tr>
@@ -46,5 +51,6 @@ if (isset($_GET['delete'])) {
         }
         ?>
     </table>
+   
 </body>
 </html>

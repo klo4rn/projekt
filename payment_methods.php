@@ -47,6 +47,7 @@ $payment_methods_result = $pdo->query("SELECT * FROM payment_methods");
     <link rel="stylesheet" href="styling.css"> 
 </head>
 <body>
+<button class="przenies" onclick="window.location.href='admin.php'">Powrót</button>
 
 <h1>Zarządzanie Metodami Płatności</h1>
 
@@ -75,8 +76,8 @@ $payment_methods_result = $pdo->query("SELECT * FROM payment_methods");
                 <td><?php echo $method['id']; ?></td>
                 <td><?php echo htmlspecialchars($method['name']); ?></td>
                 <td>
-                    <a href="payment_methods.php?edit=<?php echo $method['id']; ?>">Edytuj</a> |
-                    <a href="payment_methods.php?delete=<?php echo $method['id']; ?>" onclick="return confirm('Czy na pewno chcesz usunąć tę metodę płatności?');">Usuń</a>
+                    <a class='odsylacz'href="payment_methods.php?edit=<?php echo $method['id']; ?>">Edytuj</a> |
+                    <a class='odsylacz' href="payment_methods.php?delete=<?php echo $method['id']; ?>" onclick="return confirm('Czy na pewno chcesz usunąć tę metodę płatności?');">Usuń</a>
                 </td>
             </tr>
         <?php endwhile; ?>

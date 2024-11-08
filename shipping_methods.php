@@ -52,6 +52,7 @@ $shipping_methods_result = $pdo->query("SELECT * FROM shipping_methods");
     <link rel="stylesheet" href="styling.css">
 </head>
 <body>
+<button class="przenies" onclick="window.location.href='admin.php'">Powrót</button>
 
 <h1>Zarządzanie Metodami Dostawy</h1>
 
@@ -84,8 +85,8 @@ $shipping_methods_result = $pdo->query("SELECT * FROM shipping_methods");
                 <td><?php echo htmlspecialchars($method['name']); ?></td>
                 <td><?php echo number_format($method['cost'], 2); ?> PLN</td>
                 <td>
-                    <a href="shipping_methods.php?edit=<?php echo $method['id']; ?>">Edytuj</a> |
-                    <a href="shipping_methods.php?delete=<?php echo $method['id']; ?>" onclick="return confirm('Czy na pewno chcesz usunąć tę metodę dostawy?');">Usuń</a>
+                    <a class='odsylacz' href="shipping_methods.php?edit=<?php echo $method['id']; ?>">Edytuj</a> |
+                    <a class='odsylacz' href="shipping_methods.php?delete=<?php echo $method['id']; ?>" onclick="return confirm('Czy na pewno chcesz usunąć tę metodę dostawy?');">Usuń</a>
                 </td>
             </tr>
         <?php endwhile; ?>
@@ -115,6 +116,7 @@ $shipping_methods_result = $pdo->query("SELECT * FROM shipping_methods");
         </form>
     </div>
 <?php endif; ?>
+
 
 </body>
 </html>
