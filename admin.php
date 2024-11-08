@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -10,15 +11,15 @@
     <h1>Witamy w panelu administracyjnym</h1>
     <nav>
         <ul>
-            <li><a href="products.php">Zarządzanie Produktami</a></li>
-            <li><a href="categories.php">Zarządzanie Kategoriami</a></li>
-            <li><a href="parameters.php">Zarządzanie Parametrami</a></li>
-            <li><a href="customers.php">Zarządzanie Klientami</a></li>
+            <li><a href="products.php"> Produkty</a></li>
+            <li><a href="categories.php">Kategorie</a></li>
+            <li><a href="parameters.php">Parametry</a></li>
+            <li><a href="customers.php">Konta użytkownika</a></li>
             <li><a href="orders.php">Zarządzanie Zamówieniami</a></li>
-            <li><a href="shipping_methods.php">Zarządzanie Sposobami Dostawy</a></li>
-            <li><a href="payment_methods.php">Zarządzanie Sposobami Płatności</a></li>
-            <li><a href="pages.php">Zarządzanie Podstronami Informacyjnymi</a></li>
+            <li><a href="shipping_methods.php"> Sposoby Dostaw</a></li>
+            <li><a href="payment_methods.php">Sposoby Płatności</a></li>
+            <li><a href="pages.php">Podstronony Informacyjne</a></li>
         </ul>
-    </nav>
+</nav>
 </body>
 </html>
