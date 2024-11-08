@@ -32,7 +32,7 @@ nav ul li a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
-    padding: 10px 15px;
+    padding: 4px 10px;
     border-radius: 5px;
     background-color: burlywood;
     transition: background-color 0.3s;
@@ -90,10 +90,10 @@ textarea {
 }
 
 button, input[type="submit"] {
-    background-color: burlywood;
+    background-color: #b5835a; 
+    color: #ffffff;
     border-radius: 20px;
     border: none;
-    color: #fff;
     padding: 10px 20px;
     font-size: 16px;
     margin-top: 15px;
@@ -102,8 +102,9 @@ button, input[type="submit"] {
 }
 
 button:hover, input[type="submit"]:hover {
-    background-color: #d4a873;
+    background-color: #8a5d4d;
 }
+
 
 a.action-link {
     color: #333;
