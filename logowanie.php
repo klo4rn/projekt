@@ -12,37 +12,40 @@
         <h3>LOGOWANIE</h3>
 
         <?php
-       
-        ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
+session_start(); 
 
-        
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            require_once 'database.php'; 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-            $login = $_POST['login'];
-            $haslo = $_POST['haslo']; 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once 'database.php'; 
 
-            
-            $stmt = $pdo->prepare("SELECT haslo FROM konto_uzytkownika WHERE login = :login"); 
-            $stmt->execute(['login' => $login]);
+    $login = $_POST['login'];
+    $haslo = $_POST['haslo']; 
 
-            if ($stmt->rowCount() > 0) {
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                $haslo_z_bazy = $row['haslo']; 
+    $stmt = $pdo->prepare("SELECT id, haslo FROM konto_uzytkownika WHERE login = :login"); 
+    $stmt->execute(['login' => $login]);
 
-                if (password_verify($haslo, $haslo_z_bazy)) {
-                    header("Location: glowna.html");
-                    exit;
-                } else {
-                    echo '<p style="color:red;">Podane hasło jest błędne.</p>'; 
-                }
-            } else {
-                echo '<p style="color:red;">Podany login jest błędny.</p>';
-            }
+    if ($stmt->rowCount() > 0) {
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $haslo_z_bazy = $row['haslo']; 
+
+        if (password_verify($haslo, $haslo_z_bazy)) {
+            $_SESSION['zalogowany_uzytkownik'] = [
+                'id' => $row['id'],
+                'login' => $login
+            ]; 
+            header("Location: index.php");
+            exit;
+        } else {
+            echo '<p style="color:red;">Podane hasło jest błędne.</p>'; 
         }
-        ?>
+    } else {
+        echo '<p style="color:red;">Podany login jest błędny.</p>';
+    }
+}
+?>
 
         <form action="" method="post"> 
             <label>Login</label><br>
@@ -73,3 +76,5 @@
     });
 </script>
 </html>
+
+

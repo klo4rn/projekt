@@ -6,15 +6,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
     $category_id = $_POST['category_id'];
     $parameter_values = $_POST['parameters'];
     $product_image = $_FILES['product_image'];
-    
+    $price = $_POST['price'];  
+    $quantity = $_POST['quantity']; 
+
     if ($product_image['error'] == 0 && in_array($product_image['type'], ['image/jpeg', 'image/png', 'image/gif'])) {
+
         $upload_dir = 'uploads/';
         $file_extension = pathinfo($product_image['name'], PATHINFO_EXTENSION);
         $target_file = $upload_dir . uniqid('img_') . '.' . $file_extension;
-        
+
         if (move_uploaded_file($product_image['tmp_name'], $target_file)) {
-            $stmt = $pdo->prepare("INSERT INTO products (name, image) VALUES (?, ?)");
-            $stmt->execute([$product_name, $target_file]);
+            
+            $stmt = $pdo->prepare("INSERT INTO products (name, image, cena, ilosc) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$product_name, $target_file, $price, $quantity]);
 
             $product_id = $pdo->lastInsertId();
 
@@ -67,6 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
             ?>
         </select>
 
+        <label for="price">Cena:</label>
+        <input type="number" name="price" id="price" step="0.01" required>  
+
+        <label for="quantity">Ilość:</label>
+        <input type="number" name="quantity" id="quantity" required>  
+
         <label>Parametry:</label>
         <?php
         $parameters = $pdo->query("SELECT * FROM parameters")->fetchAll();
@@ -87,10 +97,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
             <th>Nazwa</th>
             <th>Zdjęcie</th>
             <th>Kategoria</th>
+            <th>Cena</th>  
+            <th>Ilość</th>  
             <th>Parametry</th>
         </tr>
         <?php
-        $products = $pdo->query("SELECT p.id, p.name, p.image, c.name AS category_name
+        $products = $pdo->query("SELECT p.id, p.name, p.image, c.name AS category_name, p.cena, p.ilosc
                                  FROM products p
                                  LEFT JOIN product_categories pc ON p.id = pc.product_id
                                  LEFT JOIN categories c ON pc.category_id = c.id")->fetchAll();
@@ -100,6 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
             echo "<td>{$product['name']}</td>";
             echo "<td><img src='{$product['image']}' alt='{$product['name']}' style='width:100px; height:auto;'></td>";
             echo "<td>{$product['category_name']}</td>";
+            echo "<td>{$product['cena']} PLN</td>";  
+            echo "<td>{$product['ilosc']}</td>";  
 
             $parameters = $pdo->prepare("SELECT param.name, pp.value
                                          FROM product_parameters pp
@@ -118,8 +132,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_product'])) {
         ?>
     </table>
 </div>
-
-
    
 </body>
 </html>

@@ -69,7 +69,7 @@
             <label>Login</label><br>
             <input type="text" placeholder="Podaj login" name="login" required><br>
             <label>Haslo</label><br>
-            <input type="password" placeholder="Podaj haslo" name="haslo" id="haslo" required><br> 
+            <input type="password" placeholder="Podaj haslo" name="haslo" id="haslo" required> 
             <img src="oko.png" id="oczko" alt="Pokaż hasło"><br>
             <label>Email</label><br>
             <input type="text" placeholder="Podaj email" name="email" required><br>
