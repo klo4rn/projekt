@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+
+if (!isset($_SESSION['zalogowany_uzytkownik']) || $_SESSION['zalogowany_uzytkownik']['id'] != 1) {
+    header("Location: index.php");
+    exit;
+}
+
+?>
 
 <!DOCTYPE html>
 <html lang="pl">
@@ -18,7 +28,9 @@
             <li><a href="shipping_methods.php"> Sposoby Dostaw</a></li>
             <li><a href="payment_methods.php">Sposoby Płatności</a></li>
             <li><a href="pages.php">Podstronony Informacyjne</a></li>
+            <li><a href="index.php">Strona głowna</a></li>
         </ul>
+        
 </nav>
 </body>
 </html>

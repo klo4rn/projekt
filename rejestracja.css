@@ -28,8 +28,6 @@ input[type=submit]{
     border-width: 0px;
     width: 100px;
     margin-top: 10px;
-
-
 }
 input[name="pytanie"]{
     width: 350px;

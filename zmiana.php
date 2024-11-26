@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Zmiana hasła</title>
-    <link rel="stylesheet" href="przypominanie.css">
+    <link rel="stylesheet" href="logowanie.css">
 </head>
 <body>
     <div class="okienko">
@@ -73,7 +73,7 @@ $staraodpowiedz = $pdo->query("SELECT odpowiedz from konto_uzytkownika where log
             <label>Odpowiedź na pytanie, które podałeś przy rejestracji</label><br>
             <input type="text" placeholder="Podaj odpowiedź" name="pytanie" required><br>
             <label>Nowe hasło</label><br>
-            <input type="password" placeholder="Podaj hasło" name="nhaslo" id="nhaslo" required><br>
+            <input type="password" placeholder="Podaj hasło" name="nhaslo" id="nhaslo" required>
             <img src="oko.png" id="oczko" alt="Pokaż hasło"><br>
             <input type="submit" name="zmiana" value="Zmień hasło">
         </form>

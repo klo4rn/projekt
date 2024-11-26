@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Rejestracja</title>
-    <link rel="stylesheet" href="rejestracja.css">
+    <link rel="stylesheet" href="logowanie.css">
 </head>
 <body>
     <div class="okienko">

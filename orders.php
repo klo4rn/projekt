@@ -20,6 +20,8 @@ $orders = $pdo->query("SELECT * FROM orders")->fetchAll();
     <link rel="stylesheet" href="styling.css">
 </head>
 <body>
+<button class="przenies" onclick="window.location.href='admin.php'">Powrót</button>
+
     <h1>Zarządzanie Zamówieniami</h1>
 
     <table>

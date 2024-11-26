@@ -27,12 +27,12 @@ $carousel_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <h1>WhiskyStore</h1>
         </div>
         <div class="user-panel">
-            
+        <a href="kosz.php" class="btn">Kosz</a>
+
             <?php if ($zalogowany): ?>
                 <span>Witaj, <?php echo htmlspecialchars($_SESSION['zalogowany_uzytkownik']['login']); ?></span>
                 <?php if ($czy_admin): ?>
                     <a href="admin.php" class="btn">Panel administracyjny</a>
-                    <a href="kosz.php" class="btn">Kosz</a>
                 <?php else: ?>
                     <a href="panel_uzytkownika.php" class="btn">Panel użytkownika</a>
                     <a href="kosz.php" class="btn">Kosz</a>
@@ -63,12 +63,12 @@ $carousel_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </section>
 
     <section class="product-list">
-        <h2>Nasze Produkty</h2>
+        <h2>BESTSELLERY</h2>
         <div class="products">
             <?php foreach ($products as $product): ?>
                 <div class="product-card">
                     <a href="produkt.php?id=<?php echo $product['id']; ?>">
-                        <img src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                        <img  src="<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                         <h3><?php echo htmlspecialchars($product['name']); ?></h3>
                         <p>Cena: <?php echo htmlspecialchars($product['cena']); ?> PLN</p>
                     </a>
