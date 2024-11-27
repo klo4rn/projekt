@@ -30,6 +30,9 @@ $orders = $pdo->query("SELECT * FROM orders")->fetchAll();
             <th>Klient ID</th>
             <th>Status</th>
             <th>Cena Całkowita</th>
+            <th>Imie i nazwisko</th>
+            <th>Adres</th>
+            <th>Email</th>
         </tr>
         <?php foreach ($orders as $order): ?>
         <tr>
@@ -37,6 +40,10 @@ $orders = $pdo->query("SELECT * FROM orders")->fetchAll();
             <td><?= $order['user_id'] ?? 'Gość' ?></td>
             <td><?= $order['status'] ?></td>
             <td><?= $order['total_price'] ?> PLN</td>
+            <td><?= $order['full_name'] ?> </td>
+            <td><?= $order['address'] ?> </td>
+            <td><?= $order['contact_number'] ?> </td>
+
             <td>
                 <form action="orders.php" method="POST">
                     <input type="hidden" name="order_id" value="<?= $order['id'] ?>">

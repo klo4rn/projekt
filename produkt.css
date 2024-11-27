@@ -17,7 +17,6 @@ header {
 header .logo h1 {
     font-size: 24px;
     margin: 0;
-    
 }
 
 header .user-panel {
@@ -69,6 +68,7 @@ header .user-panel .btn:hover {
 
 .produkt-details {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
     padding: 40px 30px;
@@ -83,12 +83,33 @@ header .user-panel .btn:hover {
     flex: 1;
     max-width: 40%;
     text-align: center;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.produkt-details img {
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.produkt-details img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .produkt-details .product-description {
     flex: 1;
     max-width: 50%;
     padding-left: 30px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .produkt-details .product-description h3 {
@@ -97,33 +118,49 @@ header .user-panel .btn:hover {
     color: #333;
 }
 
-.produkt-details img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.produkt-details .product-description p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
 }
 
-.produkt-details .product-description p {
-    font-size: 18px;
+.produkt-details .product-description ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.produkt-details .product-description ul li {
+    font-size: 16px;
     color: #555;
+    margin-bottom: 10px;
     line-height: 1.5;
 }
 
-.produkt-details ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.produkt-details ul li {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 8px;
-}
-
 .produkt-details .product-description ul li strong {
-    color: #333;
+    color: #222;
+    font-weight: bold;
+}
+
+.produkt-details .product-description button {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.produkt-details .product-description button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
 }
 
 footer {
@@ -138,6 +175,7 @@ footer {
 footer p {
     margin: 0;
 }
+
 @media (max-width: 768px) {
     .produkt-details {
         flex-direction: column;

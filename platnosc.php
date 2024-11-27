@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $address = $_POST['address'];
-    $contact_number = $_POST['contact_number']; 
+    $email = $_POST['contact_number']; 
     $payment_method_id = $_POST['payment_method'];
     $shipping_method_id = $_POST['shipping_method'];
 
@@ -31,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if (empty($cart_items)) {
-        echo "Twój koszyk jest pusty!";
-        exit;
+        echo "<script type='text/javascript'>window.alert('koszyk jest pusty');
+          window.location.href='index.php';</script>";
     }
 
     $stmt = $pdo->prepare("INSERT INTO orders (user_id, full_name, address, contact_number, total_price, status) 
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ':user_id' => $user_id,
         ':full_name' => $full_name,
         ':address' => $address,
-        ':contact_number' => $contact_number,
+        ':contact_number' => $email,
         ':total_price' => calculateTotalPrice($cart_items)
     ]);
     
@@ -70,11 +70,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         setcookie('cart', json_encode([]), time() - 3600, '/');
     }
-
-    echo "Twoje zamówienie zostało złożone pomyślnie!";
+    echo "<script type='text/javascript'>window.alert('Zamowienie zostało poprawnie złożone');
+          window.location.href='index.php';</script>";
+   
+    
     exit;
 }
-
+$tytul = "Potwierdzenie";
+$tresc = "Twoje zamowienie jest w trakcie realizacji";
+if($_POST)
+{
+mail($email,$tytul,$tresc);
+}
 function calculateTotalPrice($cart_items) {
     global $pdo;
     $total_price = 0;
@@ -112,7 +119,7 @@ function calculateTotalPrice($cart_items) {
             <label for="address">Adres:</label>
             <input type="text" id="address" name="address" required><br>
 
-            <label for="contact_number">Numer kontaktowy:</label>
+            <label for="contact_number">Email:</label>
             <input type="text" id="contact_number" name="contact_number" required><br>
 
             <label for="payment_method">Wybierz metodę płatności:</label>
