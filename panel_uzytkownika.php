@@ -66,7 +66,11 @@ if (isset($_POST['update'])) {
             <?php endif; ?>
         </div>
     </header>
-
+    <div class="nav-buttons">
+        <a href="index.php" class="btn">Główna</a>
+        <a href="produkty.php" class="btn">Produkty</a>
+        <a href="kontakt.php" class="btn">Kontakt</a>
+    </div>
     <div class="panel-container">
         <div class="sidebar">
             <ul>
@@ -119,7 +123,7 @@ if (isset($_POST['update'])) {
                                 <th>Łączna cena</th>
                                 <th>Imię i nazwisko</th>
                                 <th>Adres</th>
-                                <th>Numer kontaktowy</th>
+                                <th>Email</th>
                             </tr>
                         </thead>
                         <tbody>

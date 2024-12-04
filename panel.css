@@ -141,3 +141,27 @@ footer {
     color: white;
     margin-top: 20px;
 }
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    background-color: #222;
+    gap: 15px;
+}
+
+.nav-buttons a {
+    background-color: #444;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.nav-buttons a:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}

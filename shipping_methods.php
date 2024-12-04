@@ -76,6 +76,7 @@ $shipping_methods_result = $pdo->query("SELECT * FROM shipping_methods");
             <th>ID</th>
             <th>Nazwa</th>
             <th>Koszt (PLN)</th>
+          <th>Akcja</th>
         </tr>
     </thead>
     <tbody>

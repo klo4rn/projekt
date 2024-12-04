@@ -34,8 +34,8 @@ $customers = $pdo->query("SELECT * FROM konto_uzytkownika")->fetchAll();
     <table>
         <tr>
             <th>ID</th>
-            <th>Imię</th>
-            <th>Nazwisko</th>
+            <th>login</th>
+            <th>id pytania</th>
             <th>Email</th>
             <th>Notatka</th>
             <th>Akcje</th>
@@ -44,7 +44,7 @@ $customers = $pdo->query("SELECT * FROM konto_uzytkownika")->fetchAll();
         <tr>
             <td><?= $customer['id'] ?></td>
             <td><?= $customer['login'] ?></td>
-            <td><?= $customer['haslo'] ?></td>
+            <td><?= $customer['id_pytania_pomocniczego'] ?></td>
             <td><?= $customer['email'] ?></td>
             <td><?= $customer['note'] ?? 'Brak' ?></td>
             <td>
